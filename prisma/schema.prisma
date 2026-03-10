@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Account {
+  id        String   @id @default(cuid())
+  name      String
+  type      String   // checking, savings, credit, cash
+  balance   Float    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions Transaction[]
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+  icon  String @default("tag")
+  color String @default("#6B7280")
+
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  amount      Float
+  type        String   // income or expense
+  description String
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  accountId  String
+  account    Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Budget {
+  id        String @id @default(cuid())
+  amount    Float
+  month     Int
+  year      Int
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@unique([categoryId, month, year])
+}
