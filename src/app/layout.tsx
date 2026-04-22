@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
@@ -11,7 +11,12 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "BudgetApp",
   description: "Personal finance and budgeting tool",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -22,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} antialiased bg-background`}>
-        <main className="pb-20 min-h-screen max-w-lg mx-auto">
+        <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom))] min-h-screen max-w-lg mx-auto">
           {children}
         </main>
         <BottomNav />

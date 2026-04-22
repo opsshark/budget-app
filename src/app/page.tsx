@@ -66,7 +66,7 @@ export default function Dashboard() {
           <Wallet size={18} />
           <span className="text-sm opacity-90">Total Balance</span>
         </div>
-        <p className="text-3xl font-bold">
+        <p className="text-3xl font-bold break-words tabular-nums">
           ${data.totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
         </p>
       </div>
@@ -119,24 +119,24 @@ export default function Dashboard() {
         ) : (
           <div className="divide-y divide-border">
             {data.recentTransactions.map((t) => (
-              <div key={t.id} className="flex items-center justify-between p-4">
-                <div className="flex items-center gap-3">
+              <div key={t.id} className="flex items-center justify-between gap-3 p-4">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium"
+                    className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white text-sm font-medium"
                     style={{ backgroundColor: t.category.color }}
                   >
                     {t.category.name[0]}
                   </div>
-                  <div>
-                    <p className="font-medium text-sm">{t.description}</p>
-                    <p className="text-xs text-muted">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-sm truncate">{t.description}</p>
+                    <p className="text-xs text-muted truncate">
                       {t.category.name} &middot;{" "}
                       {format(new Date(t.date), "MMM d")}
                     </p>
                   </div>
                 </div>
                 <p
-                  className={`font-semibold text-sm ${
+                  className={`font-semibold text-sm shrink-0 tabular-nums ${
                     t.type === "income" ? "text-success" : "text-danger"
                   }`}
                 >

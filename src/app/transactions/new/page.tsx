@@ -119,6 +119,7 @@ export default function NewTransactionPage() {
             </span>
             <input
               type="number"
+              inputMode="decimal"
               step="0.01"
               min="0"
               value={amount}
@@ -150,20 +151,20 @@ export default function NewTransactionPage() {
           <label className="block text-sm font-medium text-muted mb-2">
             Category
           </label>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setCategoryId(cat.id)}
-                className={`flex items-center gap-2 p-3 rounded-xl border text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 p-3 rounded-xl border text-sm font-medium transition-colors min-w-0 ${
                   categoryId === cat.id
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border bg-card text-foreground"
                 }`}
               >
                 <div
-                  className="w-3 h-3 rounded-full"
+                  className="w-3 h-3 shrink-0 rounded-full"
                   style={{ backgroundColor: cat.color }}
                 />
                 <span className="truncate">{cat.name}</span>

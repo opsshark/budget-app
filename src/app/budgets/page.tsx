@@ -81,9 +81,9 @@ export default function BudgetsPage() {
       {/* Summary */}
       {budgets.length > 0 && (
         <div className="bg-card rounded-xl p-4 border border-border">
-          <div className="flex justify-between text-sm mb-2">
-            <span className="text-muted">Total Budget</span>
-            <span className="font-semibold">
+          <div className="flex justify-between items-center gap-3 text-sm mb-2">
+            <span className="text-muted shrink-0">Total Budget</span>
+            <span className="font-semibold tabular-nums text-right truncate">
               ${totalSpent.toLocaleString("en-US", { minimumFractionDigits: 2 })} / $
               {totalBudget.toLocaleString("en-US", { minimumFractionDigits: 2 })}
             </span>
@@ -111,18 +111,18 @@ export default function BudgetsPage() {
               key={b.id}
               className="bg-card rounded-xl p-4 border border-border"
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between gap-3 mb-2">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
                   <div
-                    className="w-3 h-3 rounded-full"
+                    className="w-3 h-3 shrink-0 rounded-full"
                     style={{ backgroundColor: b.category.color }}
                   />
-                  <span className="font-medium text-sm">
+                  <span className="font-medium text-sm truncate">
                     {b.category.name}
                   </span>
                 </div>
                 <span
-                  className={`text-sm font-semibold ${
+                  className={`text-sm font-semibold shrink-0 tabular-nums ${
                     over ? "text-danger" : "text-foreground"
                   }`}
                 >
@@ -164,7 +164,7 @@ export default function BudgetsPage() {
           <select
             value={newBudgetCategory}
             onChange={(e) => setNewBudgetCategory(e.target.value)}
-            className="w-full bg-background border border-border rounded-xl py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full bg-background border border-border rounded-xl py-2.5 px-4 text-base focus:outline-none focus:ring-2 focus:ring-primary"
           >
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -174,12 +174,13 @@ export default function BudgetsPage() {
           </select>
           <input
             type="number"
+            inputMode="decimal"
             step="0.01"
             min="0"
             value={newBudgetAmount}
             onChange={(e) => setNewBudgetAmount(e.target.value)}
             placeholder="Budget amount"
-            className="w-full bg-background border border-border rounded-xl py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full bg-background border border-border rounded-xl py-2.5 px-4 text-base focus:outline-none focus:ring-2 focus:ring-primary"
             required
           />
           <div className="flex gap-2">

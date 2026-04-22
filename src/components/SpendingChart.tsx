@@ -20,7 +20,7 @@ export function SpendingChart({ data }: SpendingChartProps) {
 
   return (
     <div className="flex items-center gap-4">
-      <div className="w-32 h-32">
+      <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -39,17 +39,17 @@ export function SpendingChart({ data }: SpendingChartProps) {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className="flex-1 space-y-2">
+      <div className="flex-1 min-w-0 space-y-2">
         {chartData.slice(0, 4).map((d) => (
-          <div key={d.name} className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2">
+          <div key={d.name} className="flex items-center justify-between gap-2 text-sm">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
               <div
-                className="w-3 h-3 rounded-full"
+                className="w-3 h-3 shrink-0 rounded-full"
                 style={{ backgroundColor: d.color }}
               />
-              <span className="text-muted">{d.name}</span>
+              <span className="text-muted truncate">{d.name}</span>
             </div>
-            <span className="font-medium">
+            <span className="font-medium shrink-0 tabular-nums">
               ${d.value.toLocaleString("en-US", { minimumFractionDigits: 2 })}
             </span>
           </div>
